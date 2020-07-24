@@ -1,0 +1,241 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : jeu. 23 juil. 2020 à 20:58
+-- Version du serveur :  10.4.13-MariaDB
+-- Version de PHP : 7.2.31
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `ged`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_categories`
+--
+
+CREATE TABLE `ged_categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_files`
+--
+
+CREATE TABLE `ged_files` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `nameView` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `url` varchar(255) NOT NULL,
+  `path` varchar(255) NOT NULL,
+  `category_id` int(11) NOT NULL DEFAULT 0,
+  `author` varchar(255) DEFAULT NULL,
+  `size` int(11) NOT NULL DEFAULT 0,
+  `description` text NOT NULL,
+  `keywords` text NOT NULL,
+  `version` varchar(255) NOT NULL,
+  `metaData` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_files_as_tags`
+--
+
+CREATE TABLE `ged_files_as_tags` (
+  `id` int(11) NOT NULL,
+  `file_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_informations`
+--
+
+CREATE TABLE `ged_informations` (
+  `id` int(11) NOT NULL,
+  `ged_name` varchar(255) NOT NULL,
+  `ged_coment` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `ged_informations`
+--
+
+INSERT INTO `ged_informations` (`id`, `ged_name`, `ged_coment`) VALUES
+(1, 'GED', 'Nouvelle GED'),
+(2, 'my super GED', 'c\'est super !!');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_tags`
+--
+
+CREATE TABLE `ged_tags` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `ged_tags`
+--
+
+INSERT INTO `ged_tags` (`id`, `name`, `description`) VALUES
+(14, 'oscillant', '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_trash`
+--
+
+CREATE TABLE `ged_trash` (
+  `id` int(11) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `data` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ged_users`
+--
+
+CREATE TABLE `ged_users` (
+  `id` int(11) NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `username` varchar(60) NOT NULL,
+  `right_read` int(11) DEFAULT 0,
+  `right_up` int(11) NOT NULL DEFAULT 0,
+  `right_admin` int(11) NOT NULL DEFAULT 0,
+  `token` varchar(255) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `ged_users`
+--
+
+INSERT INTO `ged_users` (`id`, `login`, `password`, `username`, `right_read`, `right_up`, `right_admin`, `token`) VALUES
+(8, 'aymanexpo', 'hithit', 'aymane', 0, 0, 1, '1');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `ged_categories`
+--
+ALTER TABLE `ged_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `ged_files`
+--
+ALTER TABLE `ged_files`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `ged_files_as_tags`
+--
+ALTER TABLE `ged_files_as_tags`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `ged_informations`
+--
+ALTER TABLE `ged_informations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `ged_tags`
+--
+ALTER TABLE `ged_tags`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `ged_trash`
+--
+ALTER TABLE `ged_trash`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `ged_users`
+--
+ALTER TABLE `ged_users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `ged_categories`
+--
+ALTER TABLE `ged_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `ged_files`
+--
+ALTER TABLE `ged_files`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT pour la table `ged_files_as_tags`
+--
+ALTER TABLE `ged_files_as_tags`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT pour la table `ged_informations`
+--
+ALTER TABLE `ged_informations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `ged_tags`
+--
+ALTER TABLE `ged_tags`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT pour la table `ged_trash`
+--
+ALTER TABLE `ged_trash`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT pour la table `ged_users`
+--
+ALTER TABLE `ged_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
